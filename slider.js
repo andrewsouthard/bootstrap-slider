@@ -3,7 +3,7 @@
     var windowTransitionSize = 1028;
     var indicatorLinks = true;
     var itemInFocus = 1;
-    var numOfActiveItems = 3;
+    var numActiveItems = 3;
     var winSize = windowSize();
 
     /* Set any user defined values. */
@@ -42,13 +42,26 @@
     function getScriptParams() {
         var scripts = document.getElementsByTagName('script');
         var scriptName  = scripts[scripts.length-1];
-        var validOptions = { 'data-indicatorLinks': 'indicatorLinks','data-itemLinks': 'itemLinks' };
+        var validOptions = {
+            'data-activeItems': 'numActiveItems',
+            'data-indicatorLinks': 'indicatorLinks',
+            'data-itemInFocus': 'itemInFocus',
+        };
         for(option in validOptions) {
             var attr = $(scriptName).attr(option);
             if (typeof attr !== typeof undefined && attr !== false) {
                 if(attr === 'false') {
                     eval(validOptions[option]+'='+ false);
                 } else {
+                    if(validOptions[option] == 'numActiveItems') {
+                        if(! Number.isInteger(parseInt(attr))) {
+                            attr = 3;
+                        }
+                    } else if(validOptions[option] == 'itemInFocus') {
+                        if(! Number.isInteger(parseInt(attr)) || attr > numActiveItems || attr < 1) {
+                            attr = 1;
+                        }
+                    }
                     eval(validOptions[option]+'='+ attr);
                 }
             }
@@ -167,7 +180,7 @@
 
         // Define the offset
         var offset = function() { 
-            if(len < numOfActiveItems) {
+            if(len < numActiveItems) {
                 return 0;
             } else {
                 return 1 - itemInFocus; 
@@ -210,7 +223,7 @@
             $(controls).hide(); 
         }
 
-        if(len < numOfActiveItems) {
+        if(len < numActiveItems) {
             $(inner).addClass("carousel-left");
         }
 
@@ -224,7 +237,7 @@
         /* If the window size is greater than or equal to windowTransitionSize, activate the correct number of items */
         if($( window ).width() >= windowTransitionSize) {
             var prepend = [];
-            for(var i = offset(); i < numOfActiveItems + offset() ; i++) {
+            for(var i = offset(); i < numActiveItems + offset() ; i++) {
                 var imgNum = (num + i);
                 if(i >= len) {
                     break;
@@ -241,7 +254,7 @@
                         prepend = [];
                     }
                 } else if(imgNum == len) {
-                    if(len > numOfActiveItems -1) {
+                    if(len > numActiveItems -1) {
                         $(sliderItem).eq(imgNum % len).clone().appendTo(inner);
                         $(sliderItem).eq($(sliderItem).length - 1).addClass('end-temp active item');
                     } else {
