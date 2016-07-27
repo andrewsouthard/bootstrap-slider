@@ -5,10 +5,14 @@
  * be done.
  *
 */
-.slider {
+body {
     margin-left: auto;
     margin-right: auto;
     max-width: 1200px;
+}
+p {
+    text-align: center;
+    margin: 25px;
 }
 .slider .item {
     position: relative;
@@ -67,6 +71,10 @@
 .row {
     margin-top: 20px;
 }
+h1 {
+    margin-bottom: 40px;
+    text-align: center;
+}
 .colored-block {
     width: 190px;
     height: 290px;
@@ -85,4 +93,16 @@
 }
 .purple {
     background-color: purple;
+}
+.tomato{
+    background-color: tomato;
+}
+.lime {
+    background-color: lime;
+}
+.cyan {
+    background-color: cyan;
+}
+.orange {
+    background-color: orange;
 }
