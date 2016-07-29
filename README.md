@@ -32,3 +32,34 @@ Within the slider, each item can also be a link to another page. To specify wher
 ```
 
 There are two example html files included in the repo to see the slider in action. 
+
+## Module Classes
+
+When the slider.js library is included, the _slider_ object is defined with two functions, _init_ and _focusedItemIndex_. The _init_ function is only used when _manualInit_ is set to true. The _focusedItemIndex_ function will return the index of the item currently in focus, with the first item being number 0. This is useful when combined with the _changeSlider_ event.
+
+## changeSlider Event
+
+When the slider item in focus changes, the module triggers a _changeSlider_ event. A jQuery event listener can be setup to run when this event is triggered, allowing other specific actions to occur. Combined with the _focusedItemIndex_ function, an alert can be triggered to inform the user of the item that is now active:
+
+```javascript
+$('#myslider).on('changeSlider',function() {
+    var idx = slider.focusedItemIndex();
+    alert("Slider item "+idx+" is now in focus!");
+});
+```
+
+## Setting then in focus on page load
+
+By default, the item in focus will be the first item in the order listed on the page. However, if another item should be in focus by when the page loads, that item may be specified by adding the _sliderFocus_ CSS class to that item. So in the list of items below, for example, the third item will be in focus instead of the first item:
+
+```html
+<div class="item">
+...
+</div>
+<div class="item">
+...
+</div>
+<div class="item sliderFocus">
+...
+</div>
+```

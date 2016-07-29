@@ -39,18 +39,32 @@ var slider = (function() {
         }
     });
 
+    /* Get the item currently in focus for a specific sliderID. */
+    function focusedItemIndex(sliderID) {
+        return options[sliderID].indexOfFocusedItem;
+    }
+
     /* Initialize a slider by setting up default values, displaying the slider,
      * and adding click listeners for each control method. */
     function initializeSlider(id,opts) {
         /* An ID must be provided. Return here if it isn't. */
-        if(! id) return;
+        if(! id) {
+            console.log("The slider class and an id must be set for the slider!");
+            return;
+        }
 
         /* Set options for this slider. If no options or invalid options are
          * provided, use the defaults. */
         setOptions(id,opts);
 
+        /* Set the index if one of the items has the sliderFocus CSS class */
+        var idx = $('#'+id+' .sliderFocus').index();
+        if(idx < 0) {
+            idx = 0;
+        }
+
         /* Setup the slider */
-        changeSlider(0,id);
+        changeSlider(idx,id);
 
         /* Create click listeners for the slider controls, each item in the
          * slider and optionally for the indicators. */
@@ -333,8 +347,17 @@ var slider = (function() {
 
         /* Add the focused class to the current item. */
         $(sliderItem).not('.start-temp').eq(num).addClass('focused');
+
+        /* Save off the item index currently in focus */
+        options[sliderID].indexOfFocusedItem = num;
+
+        /* Trigger the changeSlider custom event. */
+        $('#'+sliderID).trigger("changeSlider");
     }
-    /* Make the initialize function publicly available via the module.init
-     * call. */
-    return { init: initializeSlider };
+    /* Make the initialize function and current item index function publicly
+     * available via the module.init call. */
+    return {
+        init: initializeSlider,
+        focusedItemIndex: focusedItemIndex,
+    };
 })();
