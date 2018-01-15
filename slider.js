@@ -57,6 +57,12 @@ var slider = (function() {
          * provided, use the defaults. */
         setOptions(id,opts);
 
+        /* Hide the controls if the total number of items is less than the
+         * number of items to be displayed. */
+        if(options[id].numActiveItems >= $("#"+id+" .item").length && windowSize()) {
+            $("#"+id+" .carousel-control").hide();
+        }
+
         /* Set the index if one of the items has the sliderFocus CSS class */
         var idx = $('#'+id+' .sliderFocus').index();
         if(idx < 0) {
@@ -161,6 +167,10 @@ var slider = (function() {
     /* Setup a click listener for slider controls.*/
     function controlsListeners(sliderID) {
         $('#'+sliderID+' .carousel-control').click(function(event) {
+            /* Stop the click from doing the default action. */
+            event.preventDefault();
+            event.stopPropagation();
+
             /* Nothing will happen unless the control has a left or right class. It
              * should based on the default bootstrap carousel layout. */
             if($(this).hasClass('left')) {
@@ -175,6 +185,10 @@ var slider = (function() {
      * becomes the item in focus. */
     function itemListener(sliderID) {
         $('#'+sliderID+' .carousel-inner').on('click','.item',function(event) {
+            /* Stop the click from doing the default action. */
+            event.preventDefault();
+            event.stopPropagation();
+
             var openLinkDelay = 600;
 
             /* Determine where in the list of items we are */
@@ -237,6 +251,10 @@ var slider = (function() {
             var sliderID = $($('.slider')[0]).attr('id');
         }
         $('#'+sliderID+' .carousel-indicators li').click(function(event) {
+            /* Stop the click from doing the default action. */
+            event.preventDefault();
+            event.stopPropagation();
+
             /* Get the slider ID to use to change the item in focus */
             changeSlider($(this).index(),sliderID);
         });
@@ -271,6 +289,9 @@ var slider = (function() {
                 return 1 - options[sliderID].itemInFocus;
             }
         };
+
+        /* Save the current scroll position to restore it later. */
+        var y = window.pageYOffset;
 
         /* Remove temporary items from the slider */
         $(sliderItem).remove('.start-temp');
@@ -329,16 +350,15 @@ var slider = (function() {
                 } else if(imgNum == len) {
                     if(len > options[sliderID].numActiveItems -1) {
                         $(sliderItem).eq(imgNum % len).clone().appendTo(inner);
-                        $(sliderItem).eq($(sliderItem).length - 1).addClass('end-temp active item');
+                        $(sliderItem).eq($(sliderItem).length - 1).addClass('end-temp active');
                     } else {
                         $(sliderItem).not('.start-temp').eq(imgNum % len).addClass('active');
                     }
                 } else {
                     /* if imgNum > len */
                     $(sliderItem).eq(imgNum % len).clone().appendTo(inner);
-                    $(sliderItem).eq($(sliderItem).length - 1).addClass('end-temp active');
+                    $(sliderItem).eq($(sliderItem).length - 1).addClass('active end-temp');
                 }
-
             }
             /* If the window size is less than windowTransitionSize, activate 1 item */
         } else {
@@ -353,6 +373,9 @@ var slider = (function() {
 
         /* Trigger the changeSlider custom event. */
         $('#'+sliderID).trigger("changeSlider");
+
+        /* Scroll to the initial Y position */
+        window.scrollTo(0, y);
     }
     /* Make the initialize function and current item index function publicly
      * available via the module.init call. */

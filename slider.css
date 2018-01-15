@@ -46,6 +46,7 @@ p {
     color: grey;
     top: 36%;
     transform: translateY(-50%);
+    cursor: pointer;
 }
 .slider .carousel-control:hover,
 .slider .carousel-control:focus {
