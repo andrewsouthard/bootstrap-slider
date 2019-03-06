@@ -41,7 +41,7 @@ When the slider.js library is included, the _slider_ object is defined with two 
 
 When the slider item in focus changes, the module triggers a _changeSlider_ event. A jQuery event listener can be setup to run when this event is triggered, allowing other specific actions to occur. Combined with the _focusedItemIndex_ function, an alert can be triggered to inform the user of the item that is now active:
 
-```javascript
+```
 $('#myslider).on('changeSlider',function() {
     var idx = slider.focusedItemIndex();
     alert("Slider item "+idx+" is now in focus!");
