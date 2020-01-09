@@ -4,108 +4,109 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bootstrap Slider Multiple Examples Page</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="slider.css" />
 </head>
 <body>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col">
         <h1>First Example</h1>
         <p>This slider has 3 active items with the second item in focus. Clicking on the blue item will open <a href="http://github.com" target="_blank">http://github.com</a> in a new tab. <br>Clicking on the indicators will not change the item in focus.</p>
         <div id="test-slider1" class="slider carousel" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li data-target="test-slider1" data-slide-to="0"></li>
+                <li data-target="test-slider1" data-slide-to="1"></li>
+                <li data-target="test-slider1" data-slide-to="2"></li>
+                <li data-target="test-slider1" data-slide-to="3"></li>
+                <li data-target="test-slider1" data-slide-to="4"></li>
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <div class="item">
+                <div class="carousel-item">
                     <div class="red colored-block"></div>
                     <span>Red</span>
                 </div>
-                <div class="item" data-href="http://github.com">
+                <div class="carousel-item" data-href="http://github.com">
                     <div class="blue colored-block"></div>
                     <span>Blue</span>
                 </div>
-                <div class="item">
+                <div class="carousel-item">
                     <div class="green colored-block"></div>
                     <span>Green</span>
                 </div>
-                <div class="item">
+                <div class="carousel-item">
                     <div class="yellow colored-block"></div>
                     <span>Yellow</span>
                 </div>
-                <div class="item">
+                <div class="carousel-item">
                     <div class="purple colored-block"></div>
                     <span>Purple</span>
                 </div>
             </div>
 
             <!-- Controls -->
-            <span class="left carousel-control"  href="#test-slider1" role="button">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </span>
-            <span class="right carousel-control" href="#test-slider1" role="button">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </span>
+            <a class="carousel-control-prev" href="#test-slider1" role="button" data-slide="prev">
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#test-slider1" role="button" data-slide="next">
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              <span class="sr-only">Next</span>
+            </a>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col">
         <h1>Second Example</h1>
         <p>This slider has 3 active items with the first item in focus. Clicking on the indicators will change the item in focus.</p>
         <div id="test-slider2" class="slider carousel" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li data-target="test-slider2" data-slide-to="0"></li>
+                <li data-target="test-slider2" data-slide-to="1"></li>
+                <li data-target="test-slider2" data-slide-to="2"></li>
+                <li data-target="test-slider2" data-slide-to="3"></li>
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <div class="item">
+                <div class="carousel-item">
                     <div  class="tomato colored-block"></div>
                     <span>Tomato</span>
                 </div>
-                <div class="item">
+                <div class="carousel-item">
                     <div class="lime colored-block"></div>
                     <span>Lime</span>
                 </div>
-                <div class="item">
+                <div class="carousel-item">
                     <div class="orange colored-block"></div>
                     <span>Orange</span>
                 </div>
-                <div class="item">
+                <div class="carousel-item">
                     <div class="cyan colored-block"></div>
                     <span>Cyan</span>
                 </div>
             </div>
 
             <!-- Controls -->
-            <span class="left carousel-control"  href="#test-slider2" role="button">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </span>
-            <span class="right carousel-control" href="#test-slider2" role="button">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </span>
+            <a class="carousel-control-prev" href="#test-slider2" role="button" data-slide="prev">
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#test-slider2" role="button" data-slide="next">
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              <span class="sr-only">Next</span>
+            </a>
         </div>
     </div>
 </div>
 
-<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script type="text/javascript" src="slider.js" data-manualInit="true" data-indicatorLinks="false" data-itemInFocus="2"></script>
 <script type="text/javascript">
 slider.init('test-slider1');

@@ -4,6 +4,9 @@ var slider = (function() {
     var winSize = windowSize();
     var manualInit = false;
 
+    // Setup default class names
+    var itemClass = ".carousel-item";
+
     /* Options that can only be set when the src call is made via 'data-'
      * options. */
     var dataOnlyOptions = {
@@ -59,8 +62,9 @@ var slider = (function() {
 
         /* Hide the controls if the total number of items is less than the
          * number of items to be displayed. */
-        if(options[id].numActiveItems >= $("#"+id+" .item").length && windowSize()) {
-            $("#"+id+" .carousel-control").hide();
+        if(options[id].numActiveItems >= $(`#${id} ${itemClass}`).length && windowSize()) {
+            $(`#${id} .carousel-control-prev`).hide();
+            $(`#${id} .carousel-control-next`).hide();
         }
 
         /* Set the index if one of the items has the sliderFocus CSS class */
@@ -166,25 +170,25 @@ var slider = (function() {
 
     /* Setup a click listener for slider controls.*/
     function controlsListeners(sliderID) {
-        $('#'+sliderID+' .carousel-control').click(function(event) {
+        $('#'+sliderID+' .carousel-control-prev').click(function(event) {
             /* Stop the click from doing the default action. */
             event.preventDefault();
             event.stopPropagation();
+            changeSlider('-',sliderID);
+        });
 
-            /* Nothing will happen unless the control has a left or right class. It
-             * should based on the default bootstrap carousel layout. */
-            if($(this).hasClass('left')) {
-                changeSlider('-',sliderID);
-            } else if($(this).hasClass('right')) {
-                changeSlider('+',sliderID);
-            }
+        $('#'+sliderID+' .carousel-control-next').click(function(event) {
+            /* Stop the click from doing the default action. */
+            event.preventDefault();
+            event.stopPropagation();
+            changeSlider('+',sliderID);
         });
     }
 
     /* Setup a click listener for each item so if a user clicks on it, it 
      * becomes the item in focus. */
     function itemListener(sliderID) {
-        $('#'+sliderID+' .carousel-inner').on('click','.item',function(event) {
+        $('#'+sliderID+' .carousel-inner').on('click',itemClass,function(event) {
             /* Stop the click from doing the default action. */
             event.preventDefault();
             event.stopPropagation();
@@ -197,15 +201,15 @@ var slider = (function() {
             /* Determine the number of items and the number of items that are
              * permanent. These may be different because temporary items are
              * added to the list so the slider will appear continuous. */
-            var len = $('#'+sliderID+' .carousel-inner .item').length;
-            var absLen = $('#'+sliderID+' .carousel-inner .item').not('.start-temp').not('.end-temp').length;
+            var len = $(`#${sliderID} .carousel-inner ${itemClass}`).length;
+            var absLen = $(`#${sliderID} .carousel-inner ${itemClass}`).not('.start-temp').not('.end-temp').length;
 
             /* If the absolute length is different than the current length (i.e.
              * if there are temporary items right now) */
             if(absLen < len) {
                 /* Get the number of items that were temporarily added to the end. We
                  * need this to adjust the index. */
-                var numEndTemp = len - $('#'+sliderID+' .carousel-inner .item').not('.start-temp').length;
+                var numEndTemp = len - $(`#${sliderID} .carousel-inner ${itemClass}`).not('.start-temp').length;
 
                 /* Adjust the index location if there were extra items added to 
                  * the end.*/
@@ -270,8 +274,8 @@ var slider = (function() {
         /* Only change the slider if the number and slider are defined. */
         if(num == null || sliderID == null) return;
 
-        var sliderItem = '#'+sliderID+' .item';
-        var controls   = '#'+sliderID+' .carousel-control';
+        var sliderItem = `#${sliderID} ${itemClass}`;
+        var controls   = ['#'+sliderID+' .carousel-control-prev','#'+sliderID+' .carousel-control-next'];
         var indicators = '#'+sliderID+' .carousel-indicators';
         var inner      = '#'+sliderID+' .carousel-inner';
 
@@ -318,7 +322,7 @@ var slider = (function() {
 
         /* Hide the controls if there is only one item. */
         if(len == 1) {
-            $(controls).hide(); 
+            controls.forEach(control => $(control).hide());
         }
 
         /* Set the correct indicator to active */
