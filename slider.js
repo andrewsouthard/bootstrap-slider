@@ -4,6 +4,10 @@ var slider = (function() {
     var winSize = windowSize();
     var manualInit = false;
 
+    /* Setup a global variable determining whether auto-advancing sliders should
+    preceed. The only time they won't, is on hover. */
+    var shouldAdvance = true;
+
     // Setup default class names
     var itemClass = ".carousel-item";
 
@@ -16,12 +20,14 @@ var slider = (function() {
         'numActiveItems': 'data-activeItems',
         'indicatorLinks': 'data-indicatorLinks',
         'itemInFocus': 'data-itemInFocus',
+        'interval': 'data-interval',
     };
     var options = {
         'default': {
             'indicatorLinks': true,
             'itemInFocus': 1,
             'numActiveItems':  3,
+            'interval': 3000
         },
     };
 
@@ -83,6 +89,12 @@ var slider = (function() {
         if(options[id].indicatorLinks) {
             addIndicatorListeners(id);
         }
+        
+        /* If the slider has the class of "slide", the user wants the slider to
+        automatically increment every interval. */
+        if($("#"+id).hasClass("slide")) {
+            setupAutoSlide(id); 
+        }
     }
     /* Change the number of visible items in the slider on
      * window resize if necessary */
@@ -100,6 +112,19 @@ var slider = (function() {
             winSize = ! winSize;
         }
     };
+
+    /* Setup a slider to automatically advance. */
+    function setupAutoSlide(sliderID) {
+        /* Pause auto advance if the user hovers over the slider. */
+        $(`#${sliderID}`).hover(() => { shouldAdvance = false},() => { shouldAdvance = true; });
+
+        /* Setup an interval to automatically advance except on hover. */
+        setInterval(() => {
+           if(shouldAdvance) { 
+            changeSlider('+',sliderID);
+           }
+        },options[sliderID].interval);
+    }
 
     /* Parse input and override defaults if the caller specifies values */
     function getScriptParams() {

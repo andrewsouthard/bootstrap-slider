@@ -62,8 +62,8 @@
 <div class="row">
     <div class="col">
         <h1>Second Example</h1>
-        <p>This slider has 3 active items with the first item in focus. Clicking on the indicators will change the item in focus.</p>
-        <div id="test-slider2" class="slider carousel" data-ride="carousel">
+        <p>This slider has 3 active items with the first item in focus. Clicking on the indicators will change the item in focus. The items automatically advance every 2 seconds.</p>
+        <div id="test-slider2" class="slider carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <li data-target="test-slider2" data-slide-to="0"></li>
@@ -107,7 +107,7 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script type="text/javascript" src="slider.js" data-manualInit="true" data-indicatorLinks="false" data-itemInFocus="2"></script>
+<script type="text/javascript" src="slider.js" data-manualInit="true" data-indicatorLinks="false" data-itemInFocus="2" data-interval="2000"></script>
 <script type="text/javascript">
 slider.init('test-slider1');
 slider.init('test-slider2',{'itemInFocus': 1,'indicatorLinks': 'true'});

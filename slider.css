@@ -1,10 +1,20 @@
 /* 
  * Slider CSS
- * The display: inline-block setting for .item.active is the only required CSS 
- * call here. The rest are just to make things look better and show what can 
- * be done.
- *
 */
+
+/* Required CSS Rules */
+.slider .carousel-item {
+    width: auto;
+}
+.slider .carousel-item.active {
+    display: inline-block;
+    /* This specific amount of margin isn't required, but some is. */
+    margin-left: 2.6%;
+    margin-right: 2.6%;
+} 
+/* End required CSS */
+
+/* Example page CSS */
 body {
     margin-left: auto;
     margin-right: auto;
@@ -14,6 +24,13 @@ p {
     text-align: center;
     margin: 25px;
 }
+.row {
+    margin-top: 20px;
+}
+h1 {
+    margin-bottom: 40px;
+    text-align: center;
+}
 .slider .carousel-inner {
     display: flex;
     justify-content: center;
@@ -21,15 +38,7 @@ p {
     margin-bottom: 20px;
 }
 .slider .carousel-item {
-    position: relative;
     margin-bottom: 50px;
-    text-align: center;
-    width: auto;
-}
-.slider .carousel-item.active {
-    display: inline-block;
-    margin-left: 2.6%;
-    margin-right: 2.6%;
 }
 .slider .carousel-item.active:hover { 
     cursor: pointer; 
@@ -66,14 +75,6 @@ p {
 }
 .slider .carousel-indicators li.active {
     background-color: black !important;
-}
-/* Example page CSS */
-.row {
-    margin-top: 20px;
-}
-h1 {
-    margin-bottom: 40px;
-    text-align: center;
 }
 .colored-block {
     width: 190px;
