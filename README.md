@@ -4,6 +4,7 @@ slider CSS class and include slider.css and slider.js. The slider.js module will
 
 * __activeItems__: A number specifying how many items should be displayed. The default is three.
 * __indicatorLinks__: True or false. This defines whether to make the indicators links that change the slider to the item associated with that indicator.
+* __interval__: . The number of milliseconds to wait before automaticall advancing to the next item. Default is 3000ms or 3 seconds. _Note:_ This only applies to sliders that have the CSS class of "slide". All others will only advance when manually triggered.
 * __itemInFocus__: A number specifying which item of the active items should be in focus. The default is the first item.
 * __manualInit*__: True or false. Have all slider on the page automatically initialized or tell the module it will be done manually. This is usually used to specify different settings for different sliders. The default is false.
 
