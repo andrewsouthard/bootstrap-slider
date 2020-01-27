@@ -43,7 +43,11 @@ Within the slider, each item can also be a link to another page. To specify wher
 </div>
 ```
 
-There are two example html files included in the repo to see the slider in action.
+Additionally, adding _target="\_blank"_ will open the link in a new window.
+
+## Working Examples
+
+There are two example HTML files included in the repo that show the slider in action. To use them, clone the repo and then open one of the files in your browser.
 
 ## Module Classes
 

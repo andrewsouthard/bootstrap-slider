@@ -219,6 +219,7 @@ var slider = (function() {
             event.stopPropagation();
 
             var openLinkDelay = 600;
+            var openNewWindow = false;
 
             /* Determine where in the list of items we are */
             var index = $(this).index();
@@ -251,10 +252,13 @@ var slider = (function() {
             }
 
             /* If the item has a link defined, set the url variable so it can be followed */
-            if($(this).attr('data-href') != null) {
+            if($(this).attr('data-href') !== null) {
                 var url = $(this).attr('data-href');
                 if($(this).hasClass('focused')) {
                     openLinkDelay = 0;
+                }
+                if($(this).attr("target") === "_blank") {
+                    openNewWindow = true;
                 }
             }
 
@@ -266,7 +270,12 @@ var slider = (function() {
              * the item to come into focus. */
             if(url) {
                 setTimeout(function(){
-                    window.open(url,'_target=blank');
+                    /* If the user set target="_blank", open the link in a new window. */
+                    if(openNewWindow) {
+                        window.open(url);
+                    } else {
+                        window.location.href = url
+                    }
                 },openLinkDelay);
             }
         });
